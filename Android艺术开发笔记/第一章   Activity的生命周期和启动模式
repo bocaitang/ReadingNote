@@ -6,6 +6,9 @@
 
 (4) Activity在异常情况下被回收时，onSaveInstanceState方法会被回调，回调时机是在onStop之前，
     当Activity被重新创建的时候，onRestoreInstanceState方法会被回调，时序在onStart之后；
+    工作流程：首先是Activity被意外终止时，Activity会调用onSaveInstanceState去保存数据，然后Activity会委托
+    Window去保存数据，接着Window在委托它上面的顶级容器去保存数据，顶层容器是一个ViewGroup，一般来说它很可能
+    是DecorView(布置)，最后顶层容器再去一一通知她的子元素来保存数据。------------典型的委托思想
 
 (5) Activity的LaunchMode
 
